@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Card, CardBody, CardHeader } from './Card'
 import { AlarmClock, CheckCircle2, Pause, RefreshCcw } from 'lucide-react'
+import { useWellness } from '../state/WellnessStore'
 
 export type Suggestion = {
   id: string
@@ -12,8 +13,12 @@ export type Suggestion = {
 export function SelfCareSuggestions({ items }: { items: Suggestion[] }){
   const [completedIds, setCompletedIds] = useState<string[]>([])
   const [snoozedIds, setSnoozedIds] = useState<string[]>([])
+  const wellness = useWellness()
 
-  const complete = (id: string) => setCompletedIds(v => [...new Set([...v, id])])
+  const complete = (id: string) => {
+    setCompletedIds(v => [...new Set([...v, id])])
+    wellness.addCompletion(new Date())
+  }
   const snooze = (id: string) => setSnoozedIds(v => [...new Set([...v, id])])
   const reset = () => { setCompletedIds([]); setSnoozedIds([]) }
 
