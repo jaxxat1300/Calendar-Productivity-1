@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: theme(colors.base.100);
+  --fg: theme(colors.base.800);
+  --card: white;
+  --muted: theme(colors.base.300);
+}
+
+.dark :root, .dark {
+  --bg: #0b0f14;
+  --fg: #e7e5e4;
+  --card: #0f141b;
+  --muted: #273142;
+}
+
+html, body, #root { height: 100%; }
+body {
+  @apply bg-[var(--bg)] text-[var(--fg)] antialiased;
+}
+
+.card {
+  @apply bg-[var(--card)] rounded-2xl shadow-soft border border-base-200/50;
+}
+
+.btn {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl transition-colors;
+}
+.btn-primary {
+  @apply bg-calm-100 text-base-800 hover:bg-calm-200;
+}
+.btn-ghost {
+  @apply hover:bg-base-200/60;
+}
+
+.chip {
+  @apply text-xs px-2 py-1 rounded-full bg-base-200/70;
+}
+
+
